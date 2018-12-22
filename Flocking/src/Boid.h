@@ -17,9 +17,25 @@ public:
         return m_position;
     }
 
+    const glm::vec2& GetVelocity() const
+    {
+        return m_velocity;
+    }
+
+    const glm::vec2& GetAcceleration() const
+    {
+        return m_acceleration;
+    }
+
+    float GetRotation() const;
+
     void Align(const std::vector<Boid>& boids);
     void Cohesion(const std::vector<Boid>& boids);
     void Separation(const std::vector<Boid>& boids);
+
+    bool InField(const Boid& current, const Boid& other, float radius, float fov) const;
+
+    glm::vec2 AverageVelocity(const std::vector<Boid>& boids, float perceptionRadius);
 
 private:
     /* Private members */
@@ -27,9 +43,11 @@ private:
     glm::vec2 m_velocity;
     glm::vec2 m_acceleration;
 
-    glm::vec2 m_align;
+    glm::vec2 m_alignment;
     glm::vec2 m_cohesion;
     glm::vec2 m_separation;
 
-    static constexpr double MAX_SPEED = 1.0f;
+    float maxSpeed = 4.0f;
+    float maxForce = 0.4f;
+    float fov = 360.0f;
 };

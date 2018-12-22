@@ -4,14 +4,14 @@
 #include <functional>
 #include <random>
 
-#include <glm/trigonometric.hpp>
+#include <glm/glm.hpp>
 
 #include "Flock.h"
 
 int main()
 {
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 2;
+    settings.antialiasingLevel = 1;
     constexpr int WINDOW_WIDTH = 800;
     constexpr int WINDOW_HEIGHT = 600;
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML works!", sf::Style::Default, settings);
@@ -31,9 +31,12 @@ int main()
         flock.AddBoid(boid);
     }
 
+    //window.setVerticalSyncEnabled(true);
+    //window.setFramerateLimit(60);
+
     while (window.isOpen())
     {
-        sf::Event event;
+        sf::Event event{};
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
